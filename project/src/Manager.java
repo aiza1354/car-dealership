@@ -9,15 +9,9 @@ public class Manager extends Person {
         this.position = position;
     }
 
-    public void addVehicleToInventory(Vehicle vehicle, ArrayList<Vehicle> vehicles) {
-        vehicles.add(vehicle);
+    public void addVehicleToInventory(Vehicle vehicle, VehicleInventory inventory) {
+        inventory.addVehicle(vehicle);
     }
 
-    public String displayVehiclesInStock(Vehicle vehicle, ArrayList<Vehicle> vehicleDetails) {
-        for (int i = 0; i < vehicleDetails.size(); i++) {
-            System.out.println("Type of Vehicle");
-        }
-        return null;
-    }
 
 }

@@ -1,19 +1,26 @@
 public class Vehicle {
+     int id;
      String make;
      String model;
      int year;
      int price;
      int mileage;
      String fuelType;
-
-     Vehicle(String make, String model, int year, int price, int mileage, String fuelType){
+     String colour;
+     Vehicle(int id , String make, String model, int year, int price, int mileage, String fuelType, String colour){
+         this.id = id;
          this.make = make;
          this.model = model;
          this.year = year;
          this.price = price;
          this.mileage = mileage;
          this.fuelType = fuelType;
+         this.colour = colour;
      }
+
+    public int getId() {
+        return id;
+    }
 
     public String getMake(){
          return make;
@@ -35,6 +42,14 @@ public class Vehicle {
 
     public int getMileage() {
          return mileage;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setMake(String make) {
@@ -60,5 +75,7 @@ public class Vehicle {
          this.mileage = mileage;
     }
 
-
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
 }
