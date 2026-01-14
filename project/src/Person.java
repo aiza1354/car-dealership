@@ -12,5 +12,19 @@ public class Person {
         this.age = age;
         this.position = position;
     }
+    public String getName() {
+        return name;
+    }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getPosition() {
+        return position;
+    }
 }
