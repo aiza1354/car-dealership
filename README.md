@@ -6,7 +6,7 @@
 * Calculate total inventory value ✅
 * Different vehicle types (Vehicle, Van, Motorcycle) using inheritance ✅
 * Customer records system - store customer details and purchase history ✅
-* Basic sales transactions - update inventory when vehicle sold, generate receipt_
+* Basic sales transactions - update inventory when vehicle sold, generate receipt_  ✅
 * Finance calculator - work out monthly payments based on deposit and interest rate. 
 * Vehicle comparison tool - compare specs of 2-3 vehicles side-by-side
 * Save/load inventory to file (text file or CSV)
