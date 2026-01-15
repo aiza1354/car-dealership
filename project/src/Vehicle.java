@@ -1,12 +1,12 @@
 public class Vehicle {
-     int id;
-     String make;
-     String model;
-     int year;
-     int price;
-     int mileage;
-     String fuelType;
-     String colour;
+    private int id;
+    private String make;
+    private String model;
+    private int year;
+    private int price;
+    private int mileage;
+    private String fuelType;
+    private String colour;
      Vehicle(int id , String make, String model, int year, int price, int mileage, String fuelType, String colour){
          this.id = id;
          this.make = make;

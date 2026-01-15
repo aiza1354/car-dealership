@@ -38,7 +38,7 @@ public class CustomerRecords {
                     System.out.println("  - Bought: " + v.getYear() + " " + v.getMake());
                 }
             }
-            System.out.println("-------------------------");
+            System.out.println("");
         }
     }
 }

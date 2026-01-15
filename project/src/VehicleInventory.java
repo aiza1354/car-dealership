@@ -1,4 +1,5 @@
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,23 +27,21 @@ public class VehicleInventory {
     public List<Vehicle> filter(Double maxPrice, Integer maxMileage, String fuel) {
         ArrayList<Vehicle> filteredList = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
-            boolean priceMatch = (maxPrice == null || vehicle.price <= maxPrice);
-            boolean mileageMatch = (maxMileage == null || vehicle.mileage <= maxMileage);
-            boolean fuelMatch = (fuel == null || vehicle.fuelType.equals(fuel));
+            boolean priceMatch = (maxPrice == null || vehicle.getPrice() <= maxPrice);
+            boolean mileageMatch = (maxMileage == null || vehicle.getMileage() <= maxMileage);
+            boolean fuelMatch = (fuel == null || vehicle.getFuelType().equals(fuel));
             if (priceMatch && mileageMatch && fuelMatch) {
                 filteredList.add(vehicle);
-            } else {
-                return null;
             }
         } return filteredList;
 
     }
-    public List<Vehicle> search(int year, String make, String colour) {
+    public ArrayList<Vehicle> search(int year, String make, String colour) {
         ArrayList<Vehicle> searchList = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
-            boolean yearMatch = (year == 0 || vehicle.year == year  );
-            boolean makeMatch = (make == null || vehicle.make.equals(make));
-            boolean colourMatch = (colour == null || vehicle.colour.equals(colour));
+            boolean yearMatch = (year == 0 || vehicle.getYear() == year  );
+            boolean makeMatch = (make == null || vehicle.getMake().equals(make));
+            boolean colourMatch = (colour == null || vehicle.getColour().equals(colour));
             if (yearMatch && makeMatch && colourMatch) {
                 searchList.add(vehicle);
             }
@@ -65,8 +64,8 @@ public class VehicleInventory {
     }
 
     public void saveInventoryToCSV(String fileName) {
-        try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("Type,Year,Make,Model,Price,Mileage,FuelType");
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+            writer.println("Type,Year,Make,Model,Price,Mileage,FuelType");
             for (Vehicle vehicle : vehicles) {
                 String type = vehicle.getClass().getSimpleName();
                 String line = type + "," +
@@ -76,7 +75,7 @@ public class VehicleInventory {
                         vehicle.getPrice() + "," +
                         vehicle.getMileage() + "," +
                         vehicle.getFuelType();
-                writer.write(line);
+                writer.println(line);
             }
 
             System.out.println("Inventory successfully saved to: " + fileName);

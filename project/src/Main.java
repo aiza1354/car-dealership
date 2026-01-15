@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Vehicle> Vehicles = new ArrayList<>();
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
         CustomerRecords customerRecords = new CustomerRecords();
 
         Vehicle car1 = new Vehicle(1, "Mercedes-Benz", "CLA", 2017, 50000, 5000, "Diesel", "Black");
@@ -10,18 +10,18 @@ public class Main {
         Vehicle car3 = new Vehicle(3, "Ford", "Sports", 2020, 30000, 8000, "Petrol", "Black");
         Vehicle car4 = new Vehicle(4, "Ford", "Fiesta", 2025, 20000, 7000, "Electric", "White");
 
-        Vehicles.add(car1);
-        Vehicles.add(car2);
-        Vehicles.add(car3);
-        Vehicles.add(car4);
+        vehicles.add(car1);
+        vehicles.add(car2);
+        vehicles.add(car3);
+        vehicles.add(car4);
 
-        VehicleInventory vehicleInventory = new VehicleInventory(Vehicles);
+        VehicleInventory vehicleInventory = new VehicleInventory(vehicles);
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to Aiza Car Sales 🚘!");
         System.out.println("Here is a display of the cars we have in stock: ");
         vehicleInventory.displayVehiclesInStock();
-
+        vehicleInventory.saveInventoryToCSV("Inventory.csv");
         System.out.println("Please give us your name.");
         String nameInput = scanner.nextLine();
 
@@ -41,22 +41,26 @@ public class Main {
         System.out.println("1: Search for a specific car.");
         System.out.println("2: Filter your search result.");
         System.out.println("3: Buy a Car.");
+        System.out.println("4: Exit.");
         int choice = scanner.nextInt();
         scanner.nextLine();
-
-        switch (choice) {
-            case 1:
-                showSearch(scanner, vehicleInventory);
-                break;
-            case 2:
-                showFilterResult(scanner, vehicleInventory);
-                break;
-            case 3:
-                buyCar(scanner, vehicleInventory, customerRecords);
-                break;
-            case 4:
-                System.out.println("Bye");
-                break;
+        boolean running = true;
+        while (running) {
+            switch (choice) {
+                case 1:
+                    showSearch(scanner, vehicleInventory);
+                    break;
+                case 2:
+                    showFilterResult(scanner, vehicleInventory);
+                    break;
+                case 3:
+                    buyCar(scanner, vehicleInventory, customerRecords);
+                    break;
+                case 4:
+                    System.out.println("Bye");
+                    running = false;
+                    break;
+            }
         }
     }
 
@@ -111,12 +115,14 @@ public class Main {
 
         if (selectedVehicle != null) {
             System.out.print("Enter Customer Name for the receipt: ");
-            String custName = scanner.nextLine();
-            Customer customer = customerRecords.findCustomerByName(custName);
+            String customerName = scanner.nextLine();
+            Customer customer = customerRecords.findCustomerByName(customerName);
 
             if (customer != null) {
                 currentInventory.remove(selectedVehicle);
-                System.out.println("\nRECEIPT");
+                // add the selectedVehicle to customer purchaseHistory
+                customer.addVehicleToHistory(selectedVehicle);
+                System.out.println("\nReceipt:");
                 System.out.println("Customer: " + customer.getName());
                 System.out.println("Vehicle: " + selectedVehicle.getMake() + " " + selectedVehicle.getModel());
                 System.out.println("Total: £" + selectedVehicle.getPrice());
